@@ -2,7 +2,8 @@
 
 import os
 import sys
-from distutils.core import setup
+#from distutils.core import setup
+from setuptools import setup
 from distutils.command.install import install as _install
 
 def _post_install(dir):
