@@ -4,13 +4,14 @@
 
 class Server( object ):
 
-    def __init__( self, id, username, hostname, ip, tunnel=None, port=None ):
+    def __init__( self, id, username, hostname, ip, tunnel=None, port=None, formal=None ):
         self.id       = id
         self.username = username
         self.hostname = hostname
         self.ip       = ip
         self.tunnel   = tunnel
         self.port     = port
+        self.formal   = formal
 
     def __str__( self ):
         if self.tunnel == 'None':
@@ -38,6 +39,9 @@ class Server( object ):
 
     def get_port( self ):
         return self.port
+
+    def get_formal( self ):
+        return self.formal
 
     def set_tunnel( self, tunnel ):
         self.tunnel = tunnel

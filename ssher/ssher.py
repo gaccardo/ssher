@@ -34,6 +34,7 @@ class SSHER( object ):
                                          server['ip'],
                                          server['tunnel'],
                                          server['port'],
+                                         server['formal'],
                                        ))
 
             index += 1
@@ -49,10 +50,11 @@ class SSHER( object ):
 	PB.add_column('USERNAME')
 	PB.add_column('TUNNEL')
 	PB.add_column('PORT')
+	PB.add_column('FORMAL')
 
 	for server in self.servers:
 	    PB.add_line([server.get_id(), server.get_hostname(), server.get_ip(),
-                         server.get_username(), server.get_tunnel(), server.get_port()])
+                         server.get_username(), server.get_tunnel(), server.get_port(), server.get_formal()])
 
 	PB.show_table()
 

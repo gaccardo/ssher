@@ -27,5 +27,5 @@ setup(
     author='Guido Accardo',
     author_email='gaccardo@gmail.com',
     cmdclass={'install': install},
-    install_requires=['Pybles', 'subproccess'],
+    install_requires=['Pybles >= 1.0.1'],
     packages=['ssher'])
