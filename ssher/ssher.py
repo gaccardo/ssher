@@ -73,7 +73,7 @@ class SSHER( object ):
                                         server.get_ip(),
                                         server.get_tunnel()
                                       )
-            if server.get_port() != 'None':
+            if server.get_port() == 'None':
                 os.system( "ssh %s@%s -L %s" % ( server.get_username(), 
                                                  server.get_ip(),
                                                  server.get_tunnel() ) )
