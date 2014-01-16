@@ -56,11 +56,17 @@ class SSHER( object ):
 	    PB.add_line([server.get_id(), server.get_hostname(), server.get_ip(),
                          server.get_username(), server.get_tunnel(), server.get_port(), server.get_formal()])
 
+	PB.set_color(True)
 	PB.show_table()
 
     def __getServerById( self, id ):
         for server in self.servers:
             if server.id == id:
+                return server
+
+    def __getServerByName( self, name ):
+        for server in self.servers:
+            if server.hostname == name:
                 return server
 
     def __sshConnect( self, server ):
@@ -111,8 +117,9 @@ class SSHER( object ):
                         print "establishing connection to: %s" % server
                         self.__sshConnect( server )
                 except ValueError:
-                    print "Invalid option"
-                    return -1
+                    server = self.__getServerByName( args[1] )
+                    print "establishing connection to: %s" % server
+                    self.__sshConnect( server )
         except IndexError:
             self.__showServersList()
 
