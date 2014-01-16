@@ -42,22 +42,27 @@ class SSHER( object ):
         return index
 
     def __showServersList( self, pro=False ):
-	PB = Pyble()
+    	PB = Pyble()
 
-	PB.add_column('ID')
-	PB.add_column('HOSTNAME')
-	PB.add_column('IP')
-	PB.add_column('USERNAME')
-	PB.add_column('TUNNEL')
-	PB.add_column('PORT')
-	PB.add_column('FORMAL NAME')
+    	PB.add_column('ID')
+    	PB.add_column('HOSTNAME')
+    	PB.add_column('IP')
+    	PB.add_column('USERNAME')
+    	PB.add_column('TUNNEL')
+    	PB.add_column('PORT')
+    	PB.add_column('FORMAL NAME')
 
-	for server in self.servers:
-	    PB.add_line([server.get_id(), server.get_hostname(), server.get_ip(),
-                         server.get_username(), server.get_tunnel(), server.get_port(), server.get_formal()])
+        for server in self.servers:
+            tunnel = None
+            if server.get_tunnel() == "None":
+                tunnel = "-"
+            else:
+                tunnel = server.get_tunnel()
+            PB.add_line([server.get_id(), server.get_hostname(), server.get_ip(),
+                server.get_username(), tunnel, server.get_port(), server.get_formal()])
 
-	PB.set_color(True)
-	PB.show_table()
+    	PB.set_color(True)
+    	PB.show_table()
 
     def __getServerById( self, id ):
         for server in self.servers:
