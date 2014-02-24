@@ -22,8 +22,9 @@ class SSHER( object ):
             print "Please, before use configure ~/.ssher.cfg"
             sys.exit(-1)
 
-        self.config  = Config('/home/%s/.ssher.cfg' % getpass.getuser())
-        self.servers = list()
+        self.config   = Config('/home/%s/.ssher.cfg' % getpass.getuser())
+        self.servers  = list()
+        self.internal = self.config.get_internal_config()
 
     def __generateHosts( self ):
         index = 0
@@ -67,7 +68,7 @@ class SSHER( object ):
                              server.get_username(), server.get_group(), tunnel, server.get_port(),
                              server.get_formal()])
 
-            PB.set_color(True)
+            PB.set_color(bool(self.internal['color']))
             PB.show_table()
         else:
 
@@ -91,7 +92,7 @@ class SSHER( object ):
                     PB.add_line([server.get_id(), server.get_hostname(), 
                                  server.get_ip(), server.get_group()])                    
 
-            PB.set_color(True)
+            PB.set_color(bool(self.internal['color']))
             PB.show_table()
 
 

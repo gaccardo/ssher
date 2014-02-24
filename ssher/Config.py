@@ -10,18 +10,23 @@ class Config( object ):
         self.config.read( configfile )
 
     def get_servers( self ):
-        server = list()
+        servers = list()
 
         for section in self.config.sections():
-            server.append( { 'hostname': self.config.get( section, 'hostname' ),
-                             'username': self.config.get( section, 'username' ),
-                             'ip'      : self.config.get( section, 'ip' ),
-                             'tunnel'  : self.config.get( section, 'tunnel'),
-                             'port'    : self.config.get( section, 'port'),
-                             'formal'  : self.config.get( section, 'formal'),
-                             'group'   : self.config.get( section, 'group'),
-                           }
-                          )
+            if section != "ssher":
+                servers.append( { 'hostname': self.config.get( section, 'hostname' ),
+                                  'username': self.config.get( section, 'username' ),
+                                  'ip'      : self.config.get( section, 'ip' ),
+                                  'tunnel'  : self.config.get( section, 'tunnel'),
+                                  'port'    : self.config.get( section, 'port'),
+                                  'formal'  : self.config.get( section, 'formal'),
+                                  'group'   : self.config.get( section, 'group'),
+                               }
+                              )
 
-        return server
+        return servers
+
+    def get_internal_config( self ):
+        values = {'color': self.config.getboolean('ssher', 'color')}
+        return values
 
