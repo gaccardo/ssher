@@ -57,6 +57,7 @@ class SSHER( object ):
 
             for server in self.servers:
                 tunnel = None
+                
                 if server.get_tunnel() == "None":
                     tunnel = "-"
                 else:
@@ -69,6 +70,7 @@ class SSHER( object ):
             PB.set_color(True)
             PB.show_table()
         else:
+
             PB.add_column('ID')
             PB.add_column('HOSTNAME')
             PB.add_column('IP')
@@ -81,8 +83,13 @@ class SSHER( object ):
                 else:
                     tunnel = server.get_tunnel()
 
-                PB.add_line([server.get_id(), server.get_hostname(), 
-                             server.get_ip(), server.get_group()])
+                if group is not None:
+                    if server.get_group() == group:
+                        PB.add_line([server.get_id(), server.get_hostname(), 
+                                     server.get_ip(), server.get_group()])
+                else:
+                    PB.add_line([server.get_id(), server.get_hostname(), 
+                                 server.get_ip(), server.get_group()])                    
 
             PB.set_color(True)
             PB.show_table()
@@ -128,11 +135,15 @@ class SSHER( object ):
             if args[1]   == '-L':
                 self.__showServersList(pro=True)
                 return 0
+            if args[1]   == '-g':
+                self.__showServersList(group=args[2])
+                return 0
             elif args[1] == '-h':
                 print "SSHer"
                 print "  -h - Show this help"
                 print "  -l - List available servers"
                 print "  -L - List available servers (special still in devel)"
+                print "  -g - Show only servers belonging to the given group"
                 print "NONE - List available servers"
                 print "  id - Start connection number id"
                 return 0
