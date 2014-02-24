@@ -19,6 +19,7 @@ class Config( object ):
                              'tunnel'  : self.config.get( section, 'tunnel'),
                              'port'    : self.config.get( section, 'port'),
                              'formal'  : self.config.get( section, 'formal'),
+                             'group'   : self.config.get( section, 'group'),
                            }
                           )
 

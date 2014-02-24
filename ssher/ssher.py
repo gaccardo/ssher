@@ -35,13 +35,14 @@ class SSHER( object ):
                                          server['tunnel'],
                                          server['port'],
                                          server['formal'],
+                                         server['group']
                                        ))
 
             index += 1
 
         return index
 
-    def __showServersList( self, pro=False ):
+    def __showServersList( self, pro=False, group=None ):
         PB = Pyble()
 
         if pro:
@@ -49,26 +50,31 @@ class SSHER( object ):
             PB.add_column('HOSTNAME')
             PB.add_column('IP')
             PB.add_column('USERNAME')
+            PB.add_column('GROUP')
             PB.add_column('TUNNEL')
             PB.add_column('PORT')
             PB.add_column('FORMAL NAME')
 
             for server in self.servers:
                 tunnel = None
+                
                 if server.get_tunnel() == "None":
                     tunnel = "-"
                 else:
                     tunnel = server.get_tunnel()
 
                 PB.add_line([server.get_id(), server.get_hostname(), server.get_ip(),
-                        server.get_username(), tunnel, server.get_port(), server.get_formal()])
+                             server.get_username(), server.get_group(), tunnel, server.get_port(),
+                             server.get_formal()])
 
             PB.set_color(True)
             PB.show_table()
         else:
+
             PB.add_column('ID')
             PB.add_column('HOSTNAME')
             PB.add_column('IP')
+            PB.add_column('GROUP')
 
             for server in self.servers:
                 tunnel = None
@@ -77,7 +83,13 @@ class SSHER( object ):
                 else:
                     tunnel = server.get_tunnel()
 
-                PB.add_line([server.get_id(), server.get_hostname(), server.get_ip()])
+                if group is not None:
+                    if server.get_group() == group:
+                        PB.add_line([server.get_id(), server.get_hostname(), 
+                                     server.get_ip(), server.get_group()])
+                else:
+                    PB.add_line([server.get_id(), server.get_hostname(), 
+                                 server.get_ip(), server.get_group()])                    
 
             PB.set_color(True)
             PB.show_table()
@@ -123,11 +135,15 @@ class SSHER( object ):
             if args[1]   == '-L':
                 self.__showServersList(pro=True)
                 return 0
+            if args[1]   == '-g':
+                self.__showServersList(group=args[2])
+                return 0
             elif args[1] == '-h':
                 print "SSHer"
                 print "  -h - Show this help"
                 print "  -l - List available servers"
                 print "  -L - List available servers (special still in devel)"
+                print "  -g - Show only servers belonging to the given group"
                 print "NONE - List available servers"
                 print "  id - Start connection number id"
                 return 0
