@@ -35,13 +35,14 @@ class SSHER( object ):
                                          server['tunnel'],
                                          server['port'],
                                          server['formal'],
+                                         server['group']
                                        ))
 
             index += 1
 
         return index
 
-    def __showServersList( self, pro=False ):
+    def __showServersList( self, pro=False, group=None ):
         PB = Pyble()
 
         if pro:
@@ -49,6 +50,7 @@ class SSHER( object ):
             PB.add_column('HOSTNAME')
             PB.add_column('IP')
             PB.add_column('USERNAME')
+            PB.add_column('GROUP')
             PB.add_column('TUNNEL')
             PB.add_column('PORT')
             PB.add_column('FORMAL NAME')
@@ -61,7 +63,8 @@ class SSHER( object ):
                     tunnel = server.get_tunnel()
 
                 PB.add_line([server.get_id(), server.get_hostname(), server.get_ip(),
-                        server.get_username(), tunnel, server.get_port(), server.get_formal()])
+                             server.get_username(), server.get_group(), tunnel, server.get_port(),
+                             server.get_formal()])
 
             PB.set_color(True)
             PB.show_table()
@@ -69,6 +72,7 @@ class SSHER( object ):
             PB.add_column('ID')
             PB.add_column('HOSTNAME')
             PB.add_column('IP')
+            PB.add_column('GROUP')
 
             for server in self.servers:
                 tunnel = None
@@ -77,7 +81,8 @@ class SSHER( object ):
                 else:
                     tunnel = server.get_tunnel()
 
-                PB.add_line([server.get_id(), server.get_hostname(), server.get_ip()])
+                PB.add_line([server.get_id(), server.get_hostname(), 
+                             server.get_ip(), server.get_group()])
 
             PB.set_color(True)
             PB.show_table()
