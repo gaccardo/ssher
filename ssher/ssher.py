@@ -85,9 +85,19 @@ class SSHER( object ):
                     tunnel = server.get_tunnel()
 
                 if group is not None:
-                    if server.get_group() == group:
-                        PB.add_line([server.get_id(), server.get_hostname(), 
-                                     server.get_ip(), server.get_group()])
+
+                    try:
+                        groups = group.split(',')
+
+                        for ggg in groups:
+                            if server.get_group() == ggg:
+                                PB.add_line([server.get_id(), server.get_hostname(), 
+                                             server.get_ip(), server.get_group()])
+
+                    except:
+                        if server.get_group() == group:
+                            PB.add_line([server.get_id(), server.get_hostname(), 
+                                         server.get_ip(), server.get_group()])
                 else:
                     PB.add_line([server.get_id(), server.get_hostname(), 
                                  server.get_ip(), server.get_group()])                    
