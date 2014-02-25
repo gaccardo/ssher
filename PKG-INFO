@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: SSHer
+Version: 1.0.3
+Author: Guido Accardo
+Author-email: gaccardo at gmail com
+Home-page: http://pypi.python.org/pypi/SSHer/
+Download-url: https://pypi.python.org/packages/source/S/SSHer/SSHer-1.0.3.tar.gz
+Summary: Secure Shell sessions opener for the terminal
+License: GPLv2
+Description:
+
+ssher

@@ -22,10 +22,10 @@ class install(_install):
 
 setup(
     name='SSHer',
-    version='1.0',
+    version='1.0.3.0',
     description='Multi ssh connection launcher',
     author='Guido Accardo',
     author_email='gaccardo@gmail.com',
     cmdclass={'install': install},
-    install_requires=['Pybles >= 1.0.7'],
+    install_requires=['Pybles >= 1.0.10'],
     packages=['ssher'])
